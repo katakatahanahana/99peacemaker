@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Monster2Script : MonoBehaviour
 {
@@ -11,6 +12,12 @@ public class Monster2Script : MonoBehaviour
     private int hp = 1;
     private float Angle = 0f;
 
+    public float fadeTime = 0.5f;
+    private float time;
+    private SpriteRenderer render;
+    private Rigidbody2D rb2d;
+
+
     void Start()
     {
         ChangeDirection();
@@ -18,12 +25,15 @@ public class Monster2Script : MonoBehaviour
         //オブジェクトのスケールを取得して、移動距離を計算
         Vector3 scale = transform.localScale;
         distancePerSecond = scale.x * 10 * 20;
+
+        render = GetComponent<SpriteRenderer>();
+        rb2d = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
+        time += Time.deltaTime;
         elapsedTime += Time.deltaTime;
-
 
         if (isMoving)
         {
@@ -48,13 +58,23 @@ public class Monster2Script : MonoBehaviour
         }
         else
         {
-            if (elapsedTime > stopDuration)
+            if (!Input.GetKeyDown(KeyCode.Space) && elapsedTime > stopDuration)
             {
                 isMoving = true;
                 elapsedTime = 0f;
                 ChangeDirection();
             }
         }
+
+
+        // スペースキーを押したときにフェードアウト
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     isMoving = false;
+        //     elapsedTime = 0f;
+        //     rb2d.velocity = Vector2.zero;
+        //     StartCoroutine(FadeOutAndDestroy(fadeTime));
+        // }
     }
 
     void ChangeDirection()
@@ -80,5 +100,36 @@ public class Monster2Script : MonoBehaviour
         }
         float radian = Angle * Mathf.Deg2Rad;
         direction = new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
+    }
+    IEnumerator FadeOutAndDestroy(float time)
+    {
+        float startAlpha = render.color.a;
+
+        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / time)
+        {
+            Color newColor = new Color(render.color.r, render.color.g, render.color.b, Mathf.Lerp(startAlpha, 0, t));
+            render.color = newColor;
+
+            yield return null;
+        }
+
+        Destroy(gameObject);
+    }
+
+    //当たり判定
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Heart")
+        {
+            hp--;
+            if (hp <= 0)
+            {
+                // stop and fade out
+                isMoving = false;
+                elapsedTime = 0f;
+                rb2d.velocity = Vector2.zero;
+                StartCoroutine(FadeOutAndDestroy(fadeTime));
+            }
+        }
     }
 }
