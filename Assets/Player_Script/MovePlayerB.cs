@@ -26,6 +26,7 @@ public class MovePlayerB : MonoBehaviour
     }
     void Update()
     {
+        Animator animator = GetComponent<Animator>();
         currentTime += Time.deltaTime;
         
         if(currentTime > 0.01)
@@ -41,19 +42,27 @@ public class MovePlayerB : MonoBehaviour
         
         if(Input.GetKey(KeyCode.LeftArrow))
         {
+            animator.SetBool("Walk", true);
             Variable.directionb = 2;
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
+            animator.SetBool("Walk", true);
             Variable.directionb = 1;
         }
         else if (Input.GetKey(KeyCode.UpArrow))
         {
+            animator.SetBool("Walk", true);
             Variable.directionb = 3;
         }
         else if (Input.GetKey(KeyCode.DownArrow))
         {
+            animator.SetBool("Walk", true);
             Variable.directionb = 4;
+        }
+        else
+        {
+            animator.SetBool("Walk", false);
         }
         Rotate();
         
