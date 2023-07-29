@@ -9,9 +9,13 @@ public class TrapControllerA : MonoBehaviour
 
     private float puddle_timea = 0;
     private int puddle_flaga = 1;
+    AudioSource audioSource;
+    public AudioClip puddleSound;
+    public AudioClip holeSound;
     // Start is called before the first frame update
     void Start()
     {
+    audioSource = GetComponent<AudioSource>();
         
     }
     void Update()
@@ -40,11 +44,13 @@ public class TrapControllerA : MonoBehaviour
     {
         if(other.gameObject.tag == "hole")
         {
+            audioSource.PlayOneShot(holeSound);
             MovePlayerA.moveSpeeda = 0;
             hole_flaga = 2;
         }
         if(other.gameObject.tag == "puddle")
         {
+            audioSource.PlayOneShot(puddleSound);
             MovePlayerA.moveSpeeda = 2.5f;
             puddle_flaga = 2;
         }
