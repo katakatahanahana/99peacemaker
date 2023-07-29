@@ -46,19 +46,32 @@ public class MovePlayerB : MonoBehaviour
 
         if(Input.GetKey(KeyCode.LeftArrow))
         {
+            Animator animator = GetComponent<Animator>();
+            animator.SetBool("Walk", true);
             Variable.directionb = 2;
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
+            Animator animator = GetComponent<Animator>();
+            animator.SetBool("Walk", true);
             Variable.directionb = 1;
         }
         else if (Input.GetKey(KeyCode.UpArrow))
         {
+            Animator animator = GetComponent<Animator>();
+            animator.SetBool("Walk", true);
             Variable.directionb = 3;
         }
         else if (Input.GetKey(KeyCode.DownArrow))
         {
+            Animator animator = GetComponent<Animator>();
+            animator.SetBool("Walk", true);
             Variable.directionb = 4;
+        }
+        else
+        {
+            Animator animator = GetComponent<Animator>();
+            animator.SetBool("Walk", false);
         }
         Rotate();
         

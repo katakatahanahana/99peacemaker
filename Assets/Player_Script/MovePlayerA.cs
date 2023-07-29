@@ -28,6 +28,7 @@ public class MovePlayerA : MonoBehaviour
         player = GetComponent<SpriteRenderer>();
         objectPlayer = GetComponent<Transform>();
         audioSource = GetComponent<AudioSource>();
+        Animator animator = GetComponent<Animator>();
     }
     void Update()
     {
@@ -47,19 +48,32 @@ public class MovePlayerA : MonoBehaviour
         Vector2 p = this.transform.position;
         if(Input.GetKey(KeyCode.A))
         {
+            Animator animator = GetComponent<Animator>();
+            animator.SetBool("Walk", true);
             Variable.directiona = 2;
         }
         else if (Input.GetKey(KeyCode.D))
         {
+            Animator animator = GetComponent<Animator>();
+            animator.SetBool("Walk", true);
             Variable.directiona = 1;
         }
         else if (Input.GetKey(KeyCode.W))
         {
+             Animator animator = GetComponent<Animator>();
+            animator.SetBool("Walk", true);
             Variable.directiona = 3;
         }
         else if (Input.GetKey(KeyCode.S))
         {
+             Animator animator = GetComponent<Animator>();
+            animator.SetBool("Walk", true);
             Variable.directiona = 4;
+        }
+        else
+        {
+            Animator animator = GetComponent<Animator>();
+            animator.SetBool("Walk", false);
         }
         Rotate();
         
