@@ -111,7 +111,13 @@ public class Monster1Script : MonoBehaviour
             yield return null;
         }
 
+        Vector3 randomPosition = new Vector3(Random.Range(-7.0f, 7.0f), Random.Range(-3.0f, 3.0f), 0);
+        yield return new WaitForSeconds(8.0f);
+        Monster1Gene generator = FindObjectOfType<Monster1Gene>();
+        generator.GenerateNewMonster(randomPosition);
+
         Destroy(gameObject);
+
     }
 
     //当たり判定
@@ -122,7 +128,6 @@ public class Monster1Script : MonoBehaviour
             hp--;
             if (hp <= 0)
             {
-                // stop and fade out
                 isMoving = false;
                 elapsedTime = 0f;
                 rb2d.velocity = Vector2.zero;

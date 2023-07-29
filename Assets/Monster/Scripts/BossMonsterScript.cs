@@ -110,7 +110,10 @@ public class BossMonsterScript : MonoBehaviour
 
             yield return null;
         }
-
+        Vector3 randomPosition = new Vector3(Random.Range(-7.0f, 7.0f), Random.Range(-3.0f, 3.0f), 0);
+        yield return new WaitForSeconds(30.0f);
+        BossGene generator = FindObjectOfType<BossGene>();
+        generator.GenerateNewMonster(randomPosition);
         Destroy(gameObject);
     }
 
