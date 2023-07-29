@@ -1000,7 +1000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb5001b7feac03343bb286450397ddef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particle: {fileID: 0}
+  particle: {fileID: 3288547020862592021, guid: ff3f2eaed9c2c224c913ac2cb9fc0ccf, type: 3}
 --- !u!82 &245580147
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2294,7 +2294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43fd61d530e6341418316733e04e1ccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particle: {fileID: 0}
+  particle: {fileID: 3288547020862592021, guid: ff3f2eaed9c2c224c913ac2cb9fc0ccf, type: 3}
 --- !u!82 &752546359
 AudioSource:
   m_ObjectHideFlags: 0
