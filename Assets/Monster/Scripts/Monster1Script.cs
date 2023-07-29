@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public class Monster1Script : MonoBehaviour
 {
@@ -11,10 +10,6 @@ public class Monster1Script : MonoBehaviour
     private bool isMoving = true;
     private int hp = 1;
     private float Angle = 0f;
-    public float fadeTime = 0.5f;
-    private float time;
-    private SpriteRenderer render;
-    private Rigidbody2D rb2d;
 
     void Start()
     {
@@ -23,15 +18,10 @@ public class Monster1Script : MonoBehaviour
         //オブジェクトのスケールを取得して、移動距離を計算
         Vector3 scale = transform.localScale;
         distancePerSecond = scale.x * 20;
-
-        render = GetComponent<SpriteRenderer>();
-        rb2d = GetComponent<Rigidbody2D>();
-        Animator animator = GetComponent<Animator>();
     }
 
     void Update()
     {
-        time += Time.deltaTime;
         elapsedTime += Time.deltaTime;
 
 
@@ -42,10 +32,13 @@ public class Monster1Script : MonoBehaviour
                 Vector2 displacement = direction * distancePerSecond * Time.deltaTime;
                 Vector2 newPosition = (Vector2)transform.position + displacement;
 
-                newPosition = new Vector2(
-                Mathf.Clamp(newPosition.x, -9, 9),
-                Mathf.Clamp(newPosition.y, -4, 4)
-            );
+                Vector3 screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+
+                newPosition = new Vector2
+                (
+                    Mathf.Clamp(newPosition.x, -screenBounds.x + 1, screenBounds.x - 1),
+                    Mathf.Clamp(newPosition.y, -screenBounds.y + 1, screenBounds.y - 1)
+                );
                 transform.position = newPosition;
             }
             else
@@ -56,22 +49,12 @@ public class Monster1Script : MonoBehaviour
         }
         else
         {
-            if (!Input.GetKeyDown(KeyCode.Space) && elapsedTime > stopDuration)
+            if (elapsedTime > stopDuration)
             {
                 isMoving = true;
                 elapsedTime = 0f;
                 ChangeDirection();
             }
-        }
-        if (isMoving)
-        {
-            Animator animator = GetComponent<Animator>();
-            animator.SetBool("Walk", true);
-        }
-        else
-        {
-            Animator animator = GetComponent<Animator>();
-            animator.SetBool("Walk", false);
         }
     }
 
@@ -98,36 +81,5 @@ public class Monster1Script : MonoBehaviour
         }
         float radian = Angle * Mathf.Deg2Rad;
         direction = new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
-    }
-    IEnumerator FadeOutAndDestroy(float time)
-    {
-        float startAlpha = render.color.a;
-
-        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / time)
-        {
-            Color newColor = new Color(render.color.r, render.color.g, render.color.b, Mathf.Lerp(startAlpha, 0, t));
-            render.color = newColor;
-
-            yield return null;
-        }
-
-        Destroy(gameObject);
-    }
-
-    //当たり判定
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Beam")
-        {
-            hp--;
-            if (hp <= 0)
-            {
-                // stop and fade out
-                isMoving = false;
-                elapsedTime = 0f;
-                rb2d.velocity = Vector2.zero;
-                StartCoroutine(FadeOutAndDestroy(fadeTime));
-            }
-        }
     }
 }
