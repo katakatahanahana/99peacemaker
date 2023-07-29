@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossMonsterScript : MonoBehaviour
 {
-    public float speed = 5.0f;
+    public float speed = 3.0f;
     private Vector2 direction;
     private float changeTime = 1.5f;
     private bool isMoving = true;
@@ -32,7 +32,7 @@ public class BossMonsterScript : MonoBehaviour
             {
                 isMoving = true;
                 ChangeDirection();  
-                changeTime = 1.5f;  
+                changeTime = 3.0f;  
             }
         }
 

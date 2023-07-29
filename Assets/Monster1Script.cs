@@ -1,62 +1,74 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Monster1Script : MonoBehaviour
 {
-    public float speed = 5.0f;
+    private float distancePerSecond; // 1秒あたりに移動する距離
     private Vector2 direction;
-    private float changeTime = 1f;
+    private float elapsedTime = 0f;
+    private float moveDuration = 1f; 
+    private float stopDuration = 1f; 
     private bool isMoving = true;
-    private Camera mainCamera;
     private int hp = 1;
-
+    private float Angle = 0f;
 
     void Start()
     {
-        mainCamera = Camera.main;
         ChangeDirection();
+
+        //オブジェクトのスケールを取得して、移動距離を計算
+        Vector3 scale = transform.localScale;
+        distancePerSecond = scale.x*2;
     }
 
     void Update()
     {
-        changeTime -= Time.deltaTime;
-
-        if (changeTime <= 0f)
-        {
-            if (isMoving)
-            {
-                isMoving = false;
-                changeTime = 1f;  
-            }
-            else
-            {
-                isMoving = true;
-                ChangeDirection();  
-                changeTime = 1f;  
-            }
-        }
+        Debug.Log(transform.position);
+        elapsedTime += Time.deltaTime;
 
         if (isMoving)
         {
-            //To avoid going off-screen
-            Vector2 newPos = (Vector2)transform.position + direction * speed * Time.deltaTime;
-            Vector3 screenPos = mainCamera.WorldToViewportPoint(newPos);
-            if (screenPos.x >= 0 && screenPos.x <= 1 && screenPos.y >= 0 && screenPos.y <= 1)
+            if (elapsedTime <= moveDuration)
             {
-                transform.position = newPos;
+                Vector2 displacement = direction * distancePerSecond * Time.deltaTime;
+                transform.position = (Vector2)transform.position + displacement;
             }
             else
             {
                 isMoving = false;
-                changeTime = 1f;
+                elapsedTime = 0f;
+            }
+        }
+        else
+        {
+            if (elapsedTime > stopDuration)
+            {
+                isMoving = true;
+                elapsedTime = 0f;
+                ChangeDirection();
             }
         }
     }
 
     void ChangeDirection()
     {
-        float randomAngle = Random.Range(0f, 2f * Mathf.PI);
-        direction = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle));
+        float randomAngle = Random.Range(1,4);
+        if (randomAngle == 1)
+        {
+            Angle = 0f;
+        }
+        else if (randomAngle == 2)
+        {
+            Angle = 90f;
+        }
+        else if (randomAngle == 3)
+        {
+            Angle = 180f;
+        }
+        else if (randomAngle == 4)
+        {
+            Angle = 270f;
+        }
+    float radian = Angle * Mathf.Deg2Rad;
+    direction = new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
     }
 }
