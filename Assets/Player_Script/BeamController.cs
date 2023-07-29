@@ -22,11 +22,11 @@ public class BeamController : MonoBehaviour
     {
         if(coll.gameObject.tag == "enemy")
         {
-            Variable.enemyhp = Variable.enemyhp - Variable.power;
-            if(Variable.enemyhp <= 0)
-            {
-                Destroy(coll.gameObject);
-            }
+            //Variable.enemyhp = Variable.enemyhp - Variable.power;
+            //if(Variable.enemyhp <= 0)
+            //{
+            //    Destroy(coll.gameObject);
+            //}
             Destroy(gameObject);
         }
     }
