@@ -68,13 +68,13 @@ public class Monster2Script : MonoBehaviour
 
 
         // スペースキーを押したときにフェードアウト
-        // if (Input.GetKeyDown(KeyCode.Space))
-        // {
-        //     isMoving = false;
-        //     elapsedTime = 0f;
-        //     rb2d.velocity = Vector2.zero;
-        //     StartCoroutine(FadeOutAndDestroy(fadeTime));
-        // }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isMoving = false;
+            elapsedTime = 0f;
+            rb2d.velocity = Vector2.zero;
+            StartCoroutine(FadeOutAndDestroy(fadeTime));
+        }
     }
 
     void ChangeDirection()

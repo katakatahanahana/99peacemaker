@@ -24,6 +24,7 @@ public class BossMonsterScript : MonoBehaviour
 
         render = GetComponent<SpriteRenderer>();
         rb2d = GetComponent<Rigidbody2D>();
+        Animator animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -63,13 +64,24 @@ public class BossMonsterScript : MonoBehaviour
             }
         }
         // スペースキーを押したときにフェードアウト
-        // if (Input.GetKeyDown(KeyCode.Space))
-        // {
-        //     isMoving = false;
-        //     elapsedTime = 0f;
-        //     rb2d.velocity = Vector2.zero;
-        //     StartCoroutine(FadeOutAndDestroy(fadeTime));
-        // }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isMoving = false;
+            elapsedTime = 0f;
+            rb2d.velocity = Vector2.zero;
+            StartCoroutine(FadeOutAndDestroy(fadeTime));
+        }
+
+        if(isMoving)
+        {
+            Animator animator = GetComponent<Animator>();
+            animator.SetBool("Walk", true);
+        }
+        else
+        {
+            Animator animator = GetComponent<Animator>();
+            animator.SetBool("Walk", false);
+        }
     }
 
     void ChangeDirection()
