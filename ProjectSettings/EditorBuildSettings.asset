@@ -8,12 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/JY/Scene/Title.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/JY/Scene/GameTest.unity
     guid: 51f808cfb014ef440a6b94b4f2adede8
   - enabled: 0
-    path: Assets/Scenes/GameScene.unity
+    path: Assets/Player_Scenes/GameScene.unity
     guid: 2a9306d889ad141f3ba33de252901f9d
+  - enabled: 1
+    path: Assets/GameScene1.unity
+    guid: f95cc48d978562f41baaa00cd404fc66
   m_configObjects: {}
-  m_configObjects:
-    com.unity.input.settings: {fileID: 11400000, guid: c9219b1ea598a8248915931f55fb2461, type: 2}

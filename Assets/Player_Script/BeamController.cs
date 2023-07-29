@@ -4,6 +4,10 @@ using System.Collections;
 public class BeamController : MonoBehaviour
 {
     //[SerializeField]public float time;
+    public ParticleSystem particle;
+
+    [SerializeField,Tooltip("0:playerA , 1:playerB")]
+    public int playerNum;
 
     void start ()
     {
