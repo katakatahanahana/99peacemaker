@@ -122,10 +122,14 @@ public class BossMonsterScript : MonoBehaviour
             hp--;
             if (hp <= 0)
             {
+                BeamController beam = collision.GetComponent<BeamController>();
                 // stop and fade out
                 isMoving = false;
                 elapsedTime = 0f;
                 rb2d.velocity = Vector2.zero;
+                Instantiate(beam.particle, transform);
+                GetComponent<CircleCollider2D>().enabled = false;
+                GameObject.FindObjectOfType<GameManager>().GetPoint(beam.playerNum, 8);
                 StartCoroutine(FadeOutAndDestroy(fadeTime));
             }
         }

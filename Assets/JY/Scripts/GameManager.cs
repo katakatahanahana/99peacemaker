@@ -43,6 +43,9 @@ public class GameManager : MonoBehaviour
         switch (SceneManager.GetActiveScene().buildIndex)
         {
             case 0:
+                Button[] buttons = canvasTransform.GetComponentsInChildren<Button>();
+                buttons[0].onClick.AddListener(() => LoadScene(1));
+                buttons[1].onClick.AddListener(() => GameObject.Find("HelpPanel").SetActive(true));
                 break;
             case 1:
                 Instantiate(ingamePanel, canvasTransform);
