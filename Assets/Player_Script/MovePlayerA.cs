@@ -29,6 +29,8 @@ public class MovePlayerA : MonoBehaviour
     }
     void Update()
     {
+        Animator animator = GetComponent<Animator>();
+
         // Atan2 함수를 사용하여 각도를 구합니다. 결과는 라디안 단위입니다.
         float angleRadians = Mathf.Atan2(Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Horizontal"));
         Debug.DrawRay(transform.position, new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized, Color.red);
@@ -53,19 +55,27 @@ public class MovePlayerA : MonoBehaviour
         
         if(Input.GetKey(KeyCode.A))
         {
+            animator.SetBool("Walk", true);
             Variable.directiona = 2;
         }
         else if (Input.GetKey(KeyCode.D))
         {
+            animator.SetBool("Walk", true);
             Variable.directiona = 1;
         }
         else if (Input.GetKey(KeyCode.W))
         {
+            animator.SetBool("Walk", true);
             Variable.directiona = 3;
         }
         else if (Input.GetKey(KeyCode.S))
         {
+            animator.SetBool("Walk", true);
             Variable.directiona = 4;
+        }
+        else
+        {
+            animator.SetBool("Walk", false);
         }
         Rotate();
         
