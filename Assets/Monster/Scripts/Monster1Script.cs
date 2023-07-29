@@ -42,13 +42,10 @@ public class Monster1Script : MonoBehaviour
                 Vector2 displacement = direction * distancePerSecond * Time.deltaTime;
                 Vector2 newPosition = (Vector2)transform.position + displacement;
 
-                Vector3 screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-
-                newPosition = new Vector2
-                (
-                    Mathf.Clamp(newPosition.x, -screenBounds.x + 1, screenBounds.x - 1),
-                    Mathf.Clamp(newPosition.y, -screenBounds.y + 1, screenBounds.y - 1)
-                );
+                newPosition = new Vector2(
+                Mathf.Clamp(newPosition.x, -9, 9),
+                Mathf.Clamp(newPosition.y, -4, 4)
+            );
                 transform.position = newPosition;
             }
             else
