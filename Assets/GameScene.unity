@@ -803,8 +803,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 245580139}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.01, y: -0.48, z: 0}
-  m_LocalScale: {x: 0.103125006, y: 0.09375, z: 1}
+  m_LocalPosition: {x: 4.01, y: 0, z: 0}
+  m_LocalScale: {x: 0.04, y: 0.04, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -936,7 +936,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.580705, y: 1.5}
+  m_Offset: {x: -1.79, y: 1.5}
   serializedVersion: 2
   m_Radius: 7.9192967
 --- !u!50 &331255504
@@ -1348,7 +1348,6 @@ MonoBehaviour:
   BeamPrefab: {fileID: 7302473926204611783, guid: bd7923523be8f3646952e5181650493b, type: 3}
   flipX: 0
   span: 3
-  angle: 0
 --- !u!212 &752546356
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1409,8 +1408,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 752546351}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.48, y: -0.49, z: 0}
-  m_LocalScale: {x: 0.103125006, y: 0.09375, z: 1}
+  m_LocalPosition: {x: -4.48, y: 0, z: 0}
+  m_LocalScale: {x: 0.04, y: 0.04, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
