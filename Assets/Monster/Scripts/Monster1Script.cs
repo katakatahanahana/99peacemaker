@@ -15,6 +15,8 @@ public class Monster1Script : MonoBehaviour
     private float time;
     private SpriteRenderer render;
     private Rigidbody2D rb2d;
+    AudioSource audioSource;
+    public AudioClip attackedSound;
 
     void Start()
     {
@@ -27,6 +29,7 @@ public class Monster1Script : MonoBehaviour
         render = GetComponent<SpriteRenderer>();
         rb2d = GetComponent<Rigidbody2D>();
         Animator animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -106,7 +109,7 @@ public class Monster1Script : MonoBehaviour
     {
         float startAlpha = render.color.a;
 
-        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / time)
+        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / time*0.5f)
         {
             Color newColor = new Color(render.color.r, render.color.g, render.color.b, Mathf.Lerp(startAlpha, 0, t));
             render.color = newColor;
@@ -123,6 +126,7 @@ public class Monster1Script : MonoBehaviour
         if (collision.gameObject.tag == "Beam")
         {
             hp--;
+            audioSource.PlayOneShot(attackedSound);
             if (hp <= 0)
             {
                 // stop and fade out

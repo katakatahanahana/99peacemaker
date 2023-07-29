@@ -14,6 +14,8 @@ public class BossMonsterScript : MonoBehaviour
     private float time;
     private SpriteRenderer render;
     private Rigidbody2D rb2d;
+    AudioSource audioSource;
+    public AudioClip attackedSound;
     void Start()
     {
         ChangeDirection();
@@ -25,6 +27,7 @@ public class BossMonsterScript : MonoBehaviour
         render = GetComponent<SpriteRenderer>();
         rb2d = GetComponent<Rigidbody2D>();
         Animator animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -122,6 +125,7 @@ public class BossMonsterScript : MonoBehaviour
         if (collision.gameObject.tag == "Beam")
         {
             hp--;
+            audioSource.PlayOneShot(attackedSound);
             if (hp <= 0)
             {
                 // stop and fade out

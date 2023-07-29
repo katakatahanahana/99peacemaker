@@ -17,12 +17,15 @@ public class MovePlayerA : MonoBehaviour
     private float currentTime = 0f;
     public float angle = 0f;
     float f = 1f;
+    AudioSource audioSource;
+    public AudioClip attackSound;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         player = GetComponent<SpriteRenderer>();
         objectPlayer = GetComponent<Transform>();
+        audioSource = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -66,6 +69,7 @@ public class MovePlayerA : MonoBehaviour
                 
                 if(Variable.directiona == 1)
                 {
+                    audioSource.PlayOneShot(attackSound);
                     GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x+1.5f,posi.y+0.8f), Quaternion.identity);
                     Vector2 shootDirection = Quaternion.Euler(0f, 0f, angle) *transform.right;
                     Rigidbody2D rb = Beam.GetComponent<Rigidbody2D>();
@@ -73,6 +77,7 @@ public class MovePlayerA : MonoBehaviour
                 }
                 else if(Variable.directiona == 3)
                 {
+                    audioSource.PlayOneShot(attackSound);
                     float d = angle + 90;
                     GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x+1.5f,posi.y+0.8f), Quaternion.identity);
                     Vector2 shootDirection = Quaternion.Euler(0f, 0f, d ) *transform.right;
@@ -81,6 +86,7 @@ public class MovePlayerA : MonoBehaviour
                 }
                 else if(Variable.directiona == 4)
                 {
+                    audioSource.PlayOneShot(attackSound);
                     float d = angle + 270;
                     GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x+1.5f,posi.y+0.8f), Quaternion.identity);
                     Vector2 shootDirection = Quaternion.Euler(0f, 0f, d ) *transform.right;
@@ -92,6 +98,7 @@ public class MovePlayerA : MonoBehaviour
             {
                 if(Variable.directiona == 2)
                 {
+                    audioSource.PlayOneShot(attackSound);
                     GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x-1.5f,posi.y+0.8f), Quaternion.identity);
                     Vector2 shootDirection = Quaternion.Euler(0f, 0f, angle) *transform.right;
                     Rigidbody2D rb = Beam.GetComponent<Rigidbody2D>();
@@ -99,6 +106,7 @@ public class MovePlayerA : MonoBehaviour
                 }
                 else if(Variable.directiona == 4)
                 {
+                    audioSource.PlayOneShot(attackSound);
                     float d = angle + 90;
                     GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x-1.5f,posi.y+0.8f), Quaternion.identity);
                     Vector2 shootDirection = Quaternion.Euler(0f, 0f, d ) *transform.right;
@@ -107,6 +115,7 @@ public class MovePlayerA : MonoBehaviour
                 }
                 else if(Variable.directiona == 3)
                 {
+                    audioSource.PlayOneShot(attackSound);
                     float d = angle + 270;
                     GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x-1.5f,posi.y+0.8f), Quaternion.identity);
                     Vector2 shootDirection = Quaternion.Euler(0f, 0f, d ) *transform.right;
