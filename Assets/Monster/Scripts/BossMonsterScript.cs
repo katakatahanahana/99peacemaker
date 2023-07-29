@@ -110,6 +110,10 @@ public class BossMonsterScript : MonoBehaviour
 
             yield return null;
         }
+        Vector3 randomPosition = new Vector3(Random.Range(-7.0f, 7.0f), Random.Range(-3.0f, 3.0f), 0);
+        yield return new WaitForSeconds(30.0f);
+        BossGene generator = FindObjectOfType<BossGene>();
+        generator.GenerateNewMonster(randomPosition);
 
         Destroy(gameObject);
     }
@@ -122,14 +126,10 @@ public class BossMonsterScript : MonoBehaviour
             hp--;
             if (hp <= 0)
             {
-                BeamController beam = collision.GetComponent<BeamController>();
                 // stop and fade out
                 isMoving = false;
                 elapsedTime = 0f;
                 rb2d.velocity = Vector2.zero;
-                Instantiate(beam.particle, transform);
-                GetComponent<CircleCollider2D>().enabled = false;
-                GameObject.FindObjectOfType<GameManager>().GetPoint(beam.playerNum, 8);
                 StartCoroutine(FadeOutAndDestroy(fadeTime));
             }
         }
