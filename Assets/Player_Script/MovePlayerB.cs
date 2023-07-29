@@ -16,115 +16,116 @@ public class MovePlayerB : MonoBehaviour
     public float span = 0.01f;
     private float currentTime = 0f;
     public float angle = 0f;
-    float f =1f;
+    float f = 1f;
+    AudioSource audioSource;
+    public AudioClip attackSound;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         player = GetComponent<SpriteRenderer>();
         objectPlayer = GetComponent<Transform>();
+        audioSource = GetComponent<AudioSource>();
     }
     void Update()
     {
-        Animator animator = GetComponent<Animator>();
         currentTime += Time.deltaTime;
-        
-        if(currentTime > 0.01)
+
+        if (currentTime > 0.01)
+        {
+            if (Mathf.Abs(angle) > 60)
             {
-                if(Mathf.Abs( angle) > 60){
-                    f=-f;
-                }
-                angle +=f;
-                currentTime = 0f;
+                f = -f;
             }
+            angle += f;
+            currentTime = 0f;
+        }
         float moveHorizontal = Input.GetAxisRaw("Player2Horizontal");
         float moveVertical = Input.GetAxisRaw("Player2Vertical");
-        
-        if(Input.GetKey(KeyCode.LeftArrow))
+
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
-            animator.SetBool("Walk", true);
             Variable.directionb = 2;
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
-            animator.SetBool("Walk", true);
             Variable.directionb = 1;
         }
         else if (Input.GetKey(KeyCode.UpArrow))
         {
-            animator.SetBool("Walk", true);
             Variable.directionb = 3;
         }
         else if (Input.GetKey(KeyCode.DownArrow))
         {
-            animator.SetBool("Walk", true);
             Variable.directionb = 4;
         }
-        else
-        {
-            animator.SetBool("Walk", false);
-        }
         Rotate();
-        
+
         Vector2 posi = this.transform.position;
-        
-        if (Input.GetKeyDown (KeyCode.Return)) 
+
+        if (Input.GetKeyDown(KeyCode.Return))
         {
-            if(Variable.rb == 1)
+            if (Variable.rb == 1)
             {
-                
-                if(Variable.directionb == 1)
+
+                if (Variable.directionb == 1)
                 {
-                    GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x+1.5f,posi.y+0.8f), Quaternion.identity);
-                    Vector2 shootDirection = Quaternion.Euler(0f, 0f, angle) *transform.right;
+                    audioSource.PlayOneShot(attackSound);
+                    GameObject Beam = Instantiate(BeamPrefab, new Vector2(posi.x + 1.5f, posi.y + 0.8f), Quaternion.identity);
+                    Vector2 shootDirection = Quaternion.Euler(0f, 0f, angle) * transform.right;
                     Rigidbody2D rb = Beam.GetComponent<Rigidbody2D>();
                     rb.velocity = shootDirection * beamSpeedb; // 進行方向はスクリプトをアタッチしたGameObjectの右方向とします
                 }
-                else if(Variable.directionb == 3)
+                else if (Variable.directionb == 3)
                 {
+                    audioSource.PlayOneShot(attackSound);
                     float d = angle + 90;
-                    GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x+1.5f,posi.y+0.8f), Quaternion.identity);
-                    Vector2 shootDirection = Quaternion.Euler(0f, 0f, d ) *transform.right;
+                    GameObject Beam = Instantiate(BeamPrefab, new Vector2(posi.x + 1.5f, posi.y + 0.8f), Quaternion.identity);
+                    Vector2 shootDirection = Quaternion.Euler(0f, 0f, d) * transform.right;
                     Rigidbody2D rb = Beam.GetComponent<Rigidbody2D>();
                     rb.velocity = shootDirection * beamSpeedb; // 進行方向はスクリプトをアタッチしたGameObjectの右方向とします
                 }
-                else if(Variable.directionb == 4)
+                else if (Variable.directionb == 4)
                 {
+                    audioSource.PlayOneShot(attackSound);
                     float d = angle + 270;
-                    GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x+1.5f,posi.y+0.8f), Quaternion.identity);
-                    Vector2 shootDirection = Quaternion.Euler(0f, 0f, d ) *transform.right;
+                    GameObject Beam = Instantiate(BeamPrefab, new Vector2(posi.x + 1.5f, posi.y + 0.8f), Quaternion.identity);
+                    Vector2 shootDirection = Quaternion.Euler(0f, 0f, d) * transform.right;
                     Rigidbody2D rb = Beam.GetComponent<Rigidbody2D>();
                     rb.velocity = shootDirection * beamSpeedb; // 進行方向はスクリプトをアタッチしたGameObjectの右方向とします
                 }
             }
-            else if(Variable.rb == 2)
+            else if (Variable.rb == 2)
             {
-                if(Variable.directionb == 2)
+                if (Variable.directionb == 2)
                 {
-                    GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x-1.5f,posi.y+0.8f), Quaternion.identity);
-                    Vector2 shootDirection = Quaternion.Euler(0f, 0f, angle) *transform.right;
+                    audioSource.PlayOneShot(attackSound);
+                    GameObject Beam = Instantiate(BeamPrefab, new Vector2(posi.x - 1.5f, posi.y + 0.8f), Quaternion.identity);
+                    Vector2 shootDirection = Quaternion.Euler(0f, 0f, angle) * transform.right;
                     Rigidbody2D rb = Beam.GetComponent<Rigidbody2D>();
                     rb.velocity = shootDirection * beamSpeedb; // 進行方向はスクリプトをアタッチしたGameObjectの右方向とします
                 }
-                else if(Variable.directionb == 4)
+                else if (Variable.directionb == 4)
                 {
+                    audioSource.PlayOneShot(attackSound);
                     float d = angle + 90;
-                    GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x-1.5f,posi.y+0.8f), Quaternion.identity);
-                    Vector2 shootDirection = Quaternion.Euler(0f, 0f, d ) *transform.right;
+                    GameObject Beam = Instantiate(BeamPrefab, new Vector2(posi.x - 1.5f, posi.y + 0.8f), Quaternion.identity);
+                    Vector2 shootDirection = Quaternion.Euler(0f, 0f, d) * transform.right;
                     Rigidbody2D rb = Beam.GetComponent<Rigidbody2D>();
                     rb.velocity = shootDirection * beamSpeedb; // 進行方向はスクリプトをアタッチしたGameObjectの右方向とします
                 }
-                else if(Variable.directionb == 3)
+                else if (Variable.directionb == 3)
                 {
+                    audioSource.PlayOneShot(attackSound);
                     float d = angle + 270;
-                    GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x-1.5f,posi.y+0.8f), Quaternion.identity);
-                    Vector2 shootDirection = Quaternion.Euler(0f, 0f, d ) *transform.right;
+                    GameObject Beam = Instantiate(BeamPrefab, new Vector2(posi.x - 1.5f, posi.y + 0.8f), Quaternion.identity);
+                    Vector2 shootDirection = Quaternion.Euler(0f, 0f, d) * transform.right;
                     Rigidbody2D rb = Beam.GetComponent<Rigidbody2D>();
                     rb.velocity = shootDirection * beamSpeedb; // 進行方向はスクリプトをアタッチしたGameObjectの右方向とします
                 }
             }
-		}
-             
+        }
+
         Vector2 movement = new Vector2(moveHorizontal, moveVertical) * moveSpeedb;
 
         rb.velocity = movement;
@@ -136,13 +137,13 @@ public class MovePlayerB : MonoBehaviour
             //transform.rotation = transform.rotation * Quaternion.Euler (0, 180, 0);
             Variable.rb = 1;
             float y = 0;
-            transform.rotation = Quaternion.Euler (0, y, 0);
+            transform.rotation = Quaternion.Euler(0, y, 0);
         }
-        else if(Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             Variable.rb = 2;
             float y = 180;
-            transform.rotation = Quaternion.Euler (0, y, 0);
+            transform.rotation = Quaternion.Euler(0, y, 0);
         }
-    } 
+    }
 }

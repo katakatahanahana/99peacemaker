@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 public class TrapControllerA : MonoBehaviour
 {
@@ -9,10 +10,14 @@ public class TrapControllerA : MonoBehaviour
 
     private float puddle_timea = 0;
     private int puddle_flaga = 1;
+    AudioSource audioSource;
+    public AudioClip puddleSound;
+    public AudioClip holeSound;
     public GameObject particle;
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
 
     }
     void Update()
@@ -43,17 +48,19 @@ public class TrapControllerA : MonoBehaviour
     {
         if (other.gameObject.tag == "hole")
         {
+            audioSource.PlayOneShot(holeSound);
             MovePlayerA.moveSpeeda = 0;
             hole_flaga = 2;
         }
         if (other.gameObject.tag == "puddle")
         {
+            audioSource.PlayOneShot(puddleSound);
             MovePlayerA.moveSpeeda = 2.5f;
             puddle_flaga = 2;
             StartCoroutine(SlowParticle());
         }
-            
     }
+
     IEnumerator SlowParticle()
     {
         GameObject go = Instantiate(particle);
@@ -62,7 +69,6 @@ public class TrapControllerA : MonoBehaviour
             go.transform.position = transform.position;
             yield return new WaitForSeconds(1f);
         }
-        Destroy(go);
         yield return null;
     }
 }

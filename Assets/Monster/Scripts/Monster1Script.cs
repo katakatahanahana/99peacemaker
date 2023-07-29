@@ -15,6 +15,7 @@ public class Monster1Script : MonoBehaviour
     private float time;
     private SpriteRenderer render;
     private Rigidbody2D rb2d;
+    public AudioSource audioSource;
 
     void Start()
     {
@@ -27,6 +28,8 @@ public class Monster1Script : MonoBehaviour
         render = GetComponent<SpriteRenderer>();
         rb2d = GetComponent<Rigidbody2D>();
         Animator animator = GetComponent<Animator>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -127,6 +130,7 @@ public class Monster1Script : MonoBehaviour
             hp--;
             if (hp <= 0)
             {
+                audioSource.Play();
                 BeamController beam = collision.GetComponent<BeamController>();
                 isMoving = false;
                 elapsedTime = 0f;

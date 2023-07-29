@@ -14,6 +14,7 @@ public class BossMonsterScript : MonoBehaviour
     private float time;
     private SpriteRenderer render;
     private Rigidbody2D rb2d;
+    public AudioSource audioSource;
     void Start()
     {
         ChangeDirection();
@@ -25,6 +26,7 @@ public class BossMonsterScript : MonoBehaviour
         render = GetComponent<SpriteRenderer>();
         rb2d = GetComponent<Rigidbody2D>();
         Animator animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -126,6 +128,7 @@ public class BossMonsterScript : MonoBehaviour
             hp--;
             if (hp <= 0)
             {
+                audioSource.Play();
                 BeamController beam = collision.GetComponent<BeamController>();
                 // stop and fade out
                 isMoving = false;

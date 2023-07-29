@@ -3,7 +3,9 @@ guid: fb5001b7feac03343bb286450397ddef
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - puddleSound: {fileID: 8300000, guid: acaee16a5b4654d52aee9fb079df2b7a, type: 3}
+  - holeSound: {fileID: 8300000, guid: 4b10d8cb47a1640dc8cc6471418f4de1, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
