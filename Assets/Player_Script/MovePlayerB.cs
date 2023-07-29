@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovePlayerB : MonoBehaviour
 {
     public static float moveSpeedb = 5;
-    public static float beamSpeedb = 15;
+    public static float beamSpeedb = 7.5f;
 
     private Rigidbody2D rb;
     private SpriteRenderer player;
@@ -19,6 +19,8 @@ public class MovePlayerB : MonoBehaviour
     float f =1f;
     AudioSource audioSource;
     public AudioClip attackSound;
+
+    private float spanTime = 0f;
 
     void Start()
     {
@@ -41,7 +43,7 @@ public class MovePlayerB : MonoBehaviour
             }
         float moveHorizontal = Input.GetAxisRaw("Player2Horizontal");
         float moveVertical = Input.GetAxisRaw("Player2Vertical");
-        
+
         if(Input.GetKey(KeyCode.LeftArrow))
         {
             Variable.directionb = 2;
@@ -61,8 +63,8 @@ public class MovePlayerB : MonoBehaviour
         Rotate();
         
         Vector2 posi = this.transform.position;
-        
-        if (Input.GetKeyDown (KeyCode.Return)) 
+        spanTime += Time.deltaTime;
+        if (Input.GetKeyDown (KeyCode.Return)&&(spanTime > 0.5f)) 
         {
             if(Variable.rb == 1)
             {
@@ -70,7 +72,7 @@ public class MovePlayerB : MonoBehaviour
                 if(Variable.directionb == 1)
                 {
                     audioSource.PlayOneShot(attackSound);
-                    GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x+1.5f,posi.y+0.8f), Quaternion.identity);
+                    GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x+0.3f,posi.y+0.25f), Quaternion.identity);
                     Vector2 shootDirection = Quaternion.Euler(0f, 0f, angle) *transform.right;
                     Rigidbody2D rb = Beam.GetComponent<Rigidbody2D>();
                     rb.velocity = shootDirection * beamSpeedb; // 進行方向はスクリプトをアタッチしたGameObjectの右方向とします
@@ -79,7 +81,7 @@ public class MovePlayerB : MonoBehaviour
                 {
                     audioSource.PlayOneShot(attackSound);
                     float d = angle + 90;
-                    GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x+1.5f,posi.y+0.8f), Quaternion.identity);
+                    GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x+0.3f,posi.y+0.25f), Quaternion.identity);
                     Vector2 shootDirection = Quaternion.Euler(0f, 0f, d ) *transform.right;
                     Rigidbody2D rb = Beam.GetComponent<Rigidbody2D>();
                     rb.velocity = shootDirection * beamSpeedb; // 進行方向はスクリプトをアタッチしたGameObjectの右方向とします
@@ -88,7 +90,7 @@ public class MovePlayerB : MonoBehaviour
                 {
                     audioSource.PlayOneShot(attackSound);
                     float d = angle + 270;
-                    GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x+1.5f,posi.y+0.8f), Quaternion.identity);
+                    GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x+0.3f,posi.y+0.25f), Quaternion.identity);
                     Vector2 shootDirection = Quaternion.Euler(0f, 0f, d ) *transform.right;
                     Rigidbody2D rb = Beam.GetComponent<Rigidbody2D>();
                     rb.velocity = shootDirection * beamSpeedb; // 進行方向はスクリプトをアタッチしたGameObjectの右方向とします
@@ -99,7 +101,7 @@ public class MovePlayerB : MonoBehaviour
                 if(Variable.directionb == 2)
                 {
                     audioSource.PlayOneShot(attackSound);
-                    GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x-1.5f,posi.y+0.8f), Quaternion.identity);
+                    GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x-0.3f,posi.y+0.25f), Quaternion.identity);
                     Vector2 shootDirection = Quaternion.Euler(0f, 0f, angle) *transform.right;
                     Rigidbody2D rb = Beam.GetComponent<Rigidbody2D>();
                     rb.velocity = shootDirection * beamSpeedb; // 進行方向はスクリプトをアタッチしたGameObjectの右方向とします
@@ -108,7 +110,7 @@ public class MovePlayerB : MonoBehaviour
                 {
                     audioSource.PlayOneShot(attackSound);
                     float d = angle + 90;
-                    GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x-1.5f,posi.y+0.8f), Quaternion.identity);
+                    GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x-0.3f,posi.y+0.25f), Quaternion.identity);
                     Vector2 shootDirection = Quaternion.Euler(0f, 0f, d ) *transform.right;
                     Rigidbody2D rb = Beam.GetComponent<Rigidbody2D>();
                     rb.velocity = shootDirection * beamSpeedb; // 進行方向はスクリプトをアタッチしたGameObjectの右方向とします
@@ -117,12 +119,13 @@ public class MovePlayerB : MonoBehaviour
                 {
                     audioSource.PlayOneShot(attackSound);
                     float d = angle + 270;
-                    GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x-1.5f,posi.y+0.8f), Quaternion.identity);
+                    GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x-0.3f,posi.y+0.25f), Quaternion.identity);
                     Vector2 shootDirection = Quaternion.Euler(0f, 0f, d ) *transform.right;
                     Rigidbody2D rb = Beam.GetComponent<Rigidbody2D>();
                     rb.velocity = shootDirection * beamSpeedb; // 進行方向はスクリプトをアタッチしたGameObjectの右方向とします
                 }
             }
+            spanTime = 0;
 		}
              
         Vector2 movement = new Vector2(moveHorizontal, moveVertical) * moveSpeedb;
