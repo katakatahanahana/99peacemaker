@@ -22,7 +22,6 @@ public class BossMonsterScript : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(transform.position);
         elapsedTime += Time.deltaTime;
 
 
