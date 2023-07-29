@@ -20,11 +20,14 @@ public class BeamController : MonoBehaviour
 	}
     void OnTriggerEnter2D(Collider2D coll)
     {
-        Variable.enemyhp = Variable.enemyhp - Variable.power;
-        if(Variable.enemyhp <= 0)
+        if(coll.gameObject.tag == "enemy")
         {
-            Destroy(coll.gameObject);
+            Variable.enemyhp = Variable.enemyhp - Variable.power;
+            if(Variable.enemyhp <= 0)
+            {
+                Destroy(coll.gameObject);
+            }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 }

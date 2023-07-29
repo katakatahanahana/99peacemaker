@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovePlayerA : MonoBehaviour
+public class MovePlayerB : MonoBehaviour
 {
-    [SerializeField]public float moveSpeed;
-    [SerializeField]public float beamSpeed;
+    public static float moveSpeedb = 5;
+    public static float beamSpeedb = 15;
 
     private Rigidbody2D rb;
     private SpriteRenderer player;
@@ -36,103 +36,102 @@ public class MovePlayerA : MonoBehaviour
                 angle +=f;
                 currentTime = 0f;
             }
-        float moveHorizontal = Input.GetAxisRaw("Player1Horizontal");
-        float moveVertical = Input.GetAxisRaw("Player1Vertical");
+        float moveHorizontal = Input.GetAxisRaw("Player2Horizontal");
+        float moveVertical = Input.GetAxisRaw("Player2Vertical");
         
-        if(Input.GetKey(KeyCode.A))
+        if(Input.GetKey(KeyCode.LeftArrow))
         {
-            Variable.directiona = 2;
+            Variable.directionb = 2;
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.RightArrow))
         {
-            Variable.directiona = 1;
+            Variable.directionb = 1;
         }
-        else if (Input.GetKey(KeyCode.W))
+        else if (Input.GetKey(KeyCode.UpArrow))
         {
-            Variable.directiona = 3;
+            Variable.directionb = 3;
         }
-        else if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.DownArrow))
         {
-            Variable.directiona = 4;
+            Variable.directionb = 4;
         }
         Rotate();
         
         Vector2 posi = this.transform.position;
-        Debug.Log(posi.x);
         
-        if (Input.GetKeyDown (KeyCode.Space)) 
+        if (Input.GetKeyDown (KeyCode.Return)) 
         {
-            if(Variable.ra == 1)
+            if(Variable.rb == 1)
             {
                 
-                if(Variable.directiona == 1)
+                if(Variable.directionb == 1)
                 {
                     GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x+1.5f,posi.y+0.8f), Quaternion.identity);
                     Vector2 shootDirection = Quaternion.Euler(0f, 0f, angle) *transform.right;
                     Rigidbody2D rb = Beam.GetComponent<Rigidbody2D>();
-                    rb.velocity = shootDirection * beamSpeed; // 進行方向はスクリプトをアタッチしたGameObjectの右方向とします
+                    rb.velocity = shootDirection * beamSpeedb; // 進行方向はスクリプトをアタッチしたGameObjectの右方向とします
                 }
-                else if(Variable.directiona == 3)
+                else if(Variable.directionb == 3)
                 {
                     float d = angle + 90;
                     GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x+1.5f,posi.y+0.8f), Quaternion.identity);
                     Vector2 shootDirection = Quaternion.Euler(0f, 0f, d ) *transform.right;
                     Rigidbody2D rb = Beam.GetComponent<Rigidbody2D>();
-                    rb.velocity = shootDirection * beamSpeed; // 進行方向はスクリプトをアタッチしたGameObjectの右方向とします
+                    rb.velocity = shootDirection * beamSpeedb; // 進行方向はスクリプトをアタッチしたGameObjectの右方向とします
                 }
-                else if(Variable.directiona == 4)
+                else if(Variable.directionb == 4)
                 {
                     float d = angle + 270;
                     GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x+1.5f,posi.y+0.8f), Quaternion.identity);
                     Vector2 shootDirection = Quaternion.Euler(0f, 0f, d ) *transform.right;
                     Rigidbody2D rb = Beam.GetComponent<Rigidbody2D>();
-                    rb.velocity = shootDirection * beamSpeed; // 進行方向はスクリプトをアタッチしたGameObjectの右方向とします
+                    rb.velocity = shootDirection * beamSpeedb; // 進行方向はスクリプトをアタッチしたGameObjectの右方向とします
                 }
             }
-            else if(Variable.ra == 2)
+            else if(Variable.rb == 2)
             {
-                if(Variable.directiona == 2)
+                if(Variable.directionb == 2)
                 {
                     GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x-1.5f,posi.y+0.8f), Quaternion.identity);
                     Vector2 shootDirection = Quaternion.Euler(0f, 0f, angle) *transform.right;
                     Rigidbody2D rb = Beam.GetComponent<Rigidbody2D>();
-                    rb.velocity = shootDirection * beamSpeed; // 進行方向はスクリプトをアタッチしたGameObjectの右方向とします
+                    rb.velocity = shootDirection * beamSpeedb; // 進行方向はスクリプトをアタッチしたGameObjectの右方向とします
                 }
-                else if(Variable.directiona == 4)
+                else if(Variable.directionb == 4)
                 {
                     float d = angle + 90;
                     GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x-1.5f,posi.y+0.8f), Quaternion.identity);
                     Vector2 shootDirection = Quaternion.Euler(0f, 0f, d ) *transform.right;
                     Rigidbody2D rb = Beam.GetComponent<Rigidbody2D>();
-                    rb.velocity = shootDirection * beamSpeed; // 進行方向はスクリプトをアタッチしたGameObjectの右方向とします
+                    rb.velocity = shootDirection * beamSpeedb; // 進行方向はスクリプトをアタッチしたGameObjectの右方向とします
                 }
-                else if(Variable.directiona == 3)
+                else if(Variable.directionb == 3)
                 {
                     float d = angle + 270;
                     GameObject Beam = Instantiate (BeamPrefab, new Vector2(posi.x-1.5f,posi.y+0.8f), Quaternion.identity);
                     Vector2 shootDirection = Quaternion.Euler(0f, 0f, d ) *transform.right;
                     Rigidbody2D rb = Beam.GetComponent<Rigidbody2D>();
-                    rb.velocity = shootDirection * beamSpeed; // 進行方向はスクリプトをアタッチしたGameObjectの右方向とします
+                    rb.velocity = shootDirection * beamSpeedb; // 進行方向はスクリプトをアタッチしたGameObjectの右方向とします
                 }
             }
 		}
              
-        Vector2 movement = new Vector2(moveHorizontal, moveVertical) * moveSpeed;
+        Vector2 movement = new Vector2(moveHorizontal, moveVertical) * moveSpeedb;
 
         rb.velocity = movement;
     }
     private void Rotate()
     {
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             //transform.rotation = transform.rotation * Quaternion.Euler (0, 180, 0);
-            Variable.ra = 1;
+            Variable.rb = 1;
             float y = 0;
             transform.rotation = Quaternion.Euler (0, y, 0);
         }
-        else if(Input.GetKeyDown(KeyCode.A))
+        else if(Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            Variable.ra = 2;
+            Variable.rb = 2;
             float y = 180;
             transform.rotation = Quaternion.Euler (0, y, 0);
         }
