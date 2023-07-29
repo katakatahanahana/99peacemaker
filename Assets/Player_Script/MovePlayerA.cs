@@ -16,6 +16,9 @@ public class MovePlayerA : MonoBehaviour
     public float span = 0.01f;
     private float currentTime = 0f;
     public float angle = 0f;
+
+    float moveHorizontal;
+    float moveVertical;
     float f = 1f;
 
     void Start()
@@ -36,8 +39,8 @@ public class MovePlayerA : MonoBehaviour
                 angle +=f;
                 currentTime = 0f;
             }
-        float moveHorizontal = Input.GetAxisRaw("Player1Horizontal");
-        float moveVertical = Input.GetAxisRaw("Player1Vertical");
+        moveHorizontal = Input.GetAxisRaw("Player1Horizontal");
+        moveVertical  = Input.GetAxisRaw("Player1Vertical");
         
         if(Input.GetKey(KeyCode.A))
         {
