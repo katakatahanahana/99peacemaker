@@ -63,14 +63,7 @@ public class BossMonsterScript : MonoBehaviour
                 ChangeDirection();
             }
         }
-        // スペースキーを押したときにフェードアウト
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            isMoving = false;
-            elapsedTime = 0f;
-            rb2d.velocity = Vector2.zero;
-            StartCoroutine(FadeOutAndDestroy(fadeTime));
-        }
+
 
         if(isMoving)
         {
@@ -126,7 +119,7 @@ public class BossMonsterScript : MonoBehaviour
     //当たり判定
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Heart")
+        if (collision.gameObject.tag == "Beam")
         {
             hp--;
             if (hp <= 0)
