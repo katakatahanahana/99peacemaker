@@ -122,11 +122,7 @@ public class Monster1Script : MonoBehaviour
             hp--;
             if (hp <= 0)
             {
-<<<<<<< Updated upstream
-=======
                 BeamController beam = collision.GetComponent<BeamController>();
->>>>>>> Stashed changes
-                // stop and fade out
                 isMoving = false;
                 elapsedTime = 0f;
                 rb2d.velocity = Vector2.zero;

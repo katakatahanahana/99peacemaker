@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour
     {
         points[playerNum] += point;
         pointGuages[playerNum].fillAmount = (float)points[playerNum] / maxScore;
-        Debug.Log(pointGuages[playerNum].fillAmount);
+        //Debug.Log(pointGuages[playerNum].fillAmount);
         if (points[playerNum] > maxScore) WinCheck(playerNum);
     }
     public void GetPointA()
