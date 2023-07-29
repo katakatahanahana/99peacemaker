@@ -101,9 +101,14 @@ public class Monster2Script : MonoBehaviour
 
             yield return null;
         }
+        Vector3 randomPosition = new Vector3(Random.Range(-7.0f, 7.0f), Random.Range(-3.0f, 3.0f), 0);
+        yield return new WaitForSeconds(10.0f);
+        Monster2Gene generator = FindObjectOfType<Monster2Gene>();
+        generator.GenerateNewMonster(randomPosition);
 
         Destroy(gameObject);
     }
+
 
     //当たり判定
     void OnTriggerEnter2D(Collider2D collision)
