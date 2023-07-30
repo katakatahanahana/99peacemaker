@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovePlayerB : MonoBehaviour
 {
     public static float moveSpeedb = 5;
-    public static float beamSpeedb = 7.5f;
+    public static float beamSpeedb = 15.0f;
 
     private Rigidbody2D rb;
     private SpriteRenderer player;
@@ -144,7 +144,21 @@ public class MovePlayerB : MonoBehaviour
 
         Vector2 movement = new Vector2(moveHorizontal, moveVertical) * moveSpeedb;
 
-        rb.velocity = movement;
+        float leftBoundary = -11f; // 좌측 경계
+        float rightBoundary = 11f; // 우측 경계
+        float topBoundary = 8f; // 상단 경계
+        float bottomBoundary = -8f; // 하단 경계
+
+        // 제한된 위치 계산
+        float clampedX = Mathf.Clamp(rb.position.x + movement.x * Time.deltaTime, leftBoundary, rightBoundary);
+        float clampedY = Mathf.Clamp(rb.position.y + movement.y * Time.deltaTime, bottomBoundary, topBoundary);
+
+        // 제한된 위치를 새로운 위치로 설정
+        Vector2 clampedPosition = new Vector2(clampedX, clampedY);
+
+        rb.MovePosition(clampedPosition);
+        //rb.velocity = movement;
+
     }
     private void Rotate()
     {

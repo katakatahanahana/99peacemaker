@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
     private GameObject resultPanel;
     [SerializeField]
     private GameObject ingamePanel;
+    private GameObject ingamePanel1;
     private GameObject curPanel;
 
     [SerializeField]
@@ -21,6 +23,12 @@ public class GameManager : MonoBehaviour
     private int maxScore = 45;
     [SerializeField]
     private Transform canvasTransform;
+
+    [SerializeField]
+    private VideoClip[] clip;
+
+    [SerializeField]
+    private AudioSource audioSource;
 
     private void Awake()
     {
@@ -48,13 +56,15 @@ public class GameManager : MonoBehaviour
                 buttons[1].onClick.AddListener(() => GameObject.Find("HelpPanel").SetActive(true));
                 break;
             case 1:
-                Instantiate(ingamePanel, canvasTransform);
+                ingamePanel1= Instantiate(ingamePanel, canvasTransform);
                 pointGuages[0] = GameObject.Find("PlayerA Point").GetComponent<Image>();
                 pointGuages[1] = GameObject.Find("PlayerB Point").GetComponent<Image>();
                 points[0] = 0;
                 points[1] = 0;
                 //Debug.Log(GameObject.Find("PlayerA Point").GetComponent<Image>());
                 //Debug.Log(GameObject.Find("PlayerB Point").GetComponent<Image>());
+                RawImage image = GameObject.FindObjectOfType<RawImage>();
+                image.color = new Color(1, 1, 1, 0);
                 break;
         }
 
@@ -96,8 +106,16 @@ public class GameManager : MonoBehaviour
     {
         if (curPanel != null) { return; }
         curPanel = Instantiate(resultPanel, canvasTransform);
-        curPanel.GetComponentInChildren<Text>().text = "Player" + (char)(65 + playerNum) + " Wins";
+        //curPanel.GetComponentInChildren<Text>().text = "Player" + (char)(65 + playerNum) + " Wins";
+        VideoPlayer vPlayer = GameObject.FindAnyObjectByType<VideoPlayer>();
+        RawImage image = GameObject.FindObjectOfType<RawImage>();
 
+        vPlayer.GetComponent<VideoPlayer>().clip = clip[playerNum];
+
+        vPlayer.GetComponent<VideoPlayer>().Play();
+        audioSource.Play();
+        Destroy(ingamePanel1);
+        image.color = new Color(1, 1, 1, 1);
         Button[] buttons = curPanel.GetComponentsInChildren<Button>();
         buttons[0].onClick.AddListener(() => LoadScene(0));
         buttons[1].onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name));

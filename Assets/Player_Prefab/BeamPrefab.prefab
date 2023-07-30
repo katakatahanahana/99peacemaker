@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7621cd5ee8c028349a0818e001ded520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0.35
+  time: 0.5
   particle: {fileID: 3395830642658249851, guid: af7e44f6d888acb42a0e8d549c6119f9, type: 3}
   playerNum: 0
 --- !u!50 &3975573153502252332

@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovePlayerA : MonoBehaviour
 {
     public static float moveSpeeda = 5;
-    public static float beamSpeeda = 7.5f;
+    public static float beamSpeeda = 15.0f;
 
     private Rigidbody2D rb;
     private SpriteRenderer player;
@@ -47,34 +47,37 @@ public class MovePlayerA : MonoBehaviour
         float moveVertical = Input.GetAxisRaw("Player1Vertical");
 
         Vector2 p = this.transform.position;
-        if (Input.GetKey(KeyCode.A))
+        if (this.transform.position.x < 10.0f && this.transform.position.x > -10.0f && this.transform.position.y < 10.0f && this.transform.position.y > -10.0f)
         {
-            Animator animator = GetComponent<Animator>();
-            animator.SetBool("Walk", true);
-            Variable.directiona = 2;
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            Animator animator = GetComponent<Animator>();
-            animator.SetBool("Walk", true);
-            Variable.directiona = 1;
-        }
-        else if (Input.GetKey(KeyCode.W))
-        {
-            Animator animator = GetComponent<Animator>();
-            animator.SetBool("Walk", true);
-            Variable.directiona = 3;
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            Animator animator = GetComponent<Animator>();
-            animator.SetBool("Walk", true);
-            Variable.directiona = 4;
-        }
-        else
-        {
-            Animator animator = GetComponent<Animator>();
-            animator.SetBool("Walk", false);
+            if (Input.GetKey(KeyCode.A))
+            {
+                Animator animator = GetComponent<Animator>();
+                animator.SetBool("Walk", true);
+                Variable.directiona = 2;
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                Animator animator = GetComponent<Animator>();
+                animator.SetBool("Walk", true);
+                Variable.directiona = 1;
+            }
+            else if (Input.GetKey(KeyCode.W))
+            {
+                Animator animator = GetComponent<Animator>();
+                animator.SetBool("Walk", true);
+                Variable.directiona = 3;
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                Animator animator = GetComponent<Animator>();
+                animator.SetBool("Walk", true);
+                Variable.directiona = 4;
+            }
+            else
+            {
+                Animator animator = GetComponent<Animator>();
+                animator.SetBool("Walk", false);
+            }
         }
         Rotate();
 
@@ -144,9 +147,26 @@ public class MovePlayerA : MonoBehaviour
             spanTime = 0;
         }
 
+        //Vector2 movement = new Vector2(moveHorizontal, moveVertical) * moveSpeeda;
+        //
+        //rb.velocity = movement;
+
         Vector2 movement = new Vector2(moveHorizontal, moveVertical) * moveSpeeda;
 
-        rb.velocity = movement;
+        // 사각형 범위 (left, right, top, bottom)
+        float leftBoundary = -11f; // 좌측 경계
+        float rightBoundary = 11f; // 우측 경계
+        float topBoundary = 8f; // 상단 경계
+        float bottomBoundary = -8f; // 하단 경계
+
+        // 제한된 위치 계산
+        float clampedX = Mathf.Clamp(rb.position.x + movement.x * Time.deltaTime, leftBoundary, rightBoundary);
+        float clampedY = Mathf.Clamp(rb.position.y + movement.y * Time.deltaTime, bottomBoundary, topBoundary);
+
+        // 제한된 위치를 새로운 위치로 설정
+        Vector2 clampedPosition = new Vector2(clampedX, clampedY);
+
+        rb.MovePosition(clampedPosition);
     }
     private void Rotate()
     {
