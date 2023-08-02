@@ -1,10 +1,10 @@
-# 99peacemake
+# 99PEACEMAKER
 
 GlobalGameJam_Jeonbuk2023で共同開発したゲームです。
 
  <img src="https://github.com/katakatahanahana/99peacemaker/assets/11960198/45d70a94-c5c2-46b3-a87f-c5e0f8720932" width="70%">
  
-【ゲームタイトル】  99peacemake
+【ゲームタイトル】  99PEACEMAKER
 
 【プレイ時間】  約3分
 
