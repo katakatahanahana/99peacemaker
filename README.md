@@ -4,13 +4,11 @@ GlobalGameJam_Jeonbuk2023で共同開発したゲームです。
 
  <img src="https://github.com/katakatahanahana/99peacemaker/assets/11960198/45d70a94-c5c2-46b3-a87f-c5e0f8720932" width="70%">
  
-【ゲームタイトル】  99 PeaceMaker
-
-【プレイ時間】  約3分
-
-【バージョン】  Unity 2021.3.x
-
-【表示サイズ】  1920x1080(Full HD)
+| ゲームタイトル    | 99 PeaceMaker      |
+|------------------|--------------------|
+| プレイ時間       | 約3分              |
+| バージョン       | Unity 2021.3.x     |
+| 表示サイズ       | 1920x1080(Full HD) |
 
 
 ## description
