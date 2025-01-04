@@ -17,4 +17,6 @@ GlobalGameJam_Jeonbuk2023で共同開発したゲームです。
  <img src="https://github.com/katakatahanahana/99peacemaker/assets/11960198/eac4c6f5-7b00-44b3-afe4-85410b720b32" width="70%">
  <img src="https://github.com/katakatahanahana/99peacemaker/assets/11960198/8f528bb5-cd69-47ae-8577-faa81cacd17b" width="70%">
 
-鳥の動きで一部バグが起きています。
+ゲーム画面
+
+<img src="https://github.com/user-attachments/assets/5357e5e9-4b16-4437-b218-9bc98f875b59" width="60%">
